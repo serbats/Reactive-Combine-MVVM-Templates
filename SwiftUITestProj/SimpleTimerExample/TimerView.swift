@@ -19,18 +19,26 @@ struct TimerView: View {
     let stop = PassthroughSubject<Void, Never>()
     let reset = PassthroughSubject<Void, Never>()
     
+    @SubjectBinding var text: String = ""
+    
     init(viewModel: TimerViewModel) {
         self.viewModel = viewModel
         
         let input = TimerViewModel.Input(startTap: start.eraseToAnyPublisher(),
                                          stopTap: stop.eraseToAnyPublisher(),
-                                         resetTap: reset.eraseToAnyPublisher())
+                                         resetTap: reset.eraseToAnyPublisher(),
+                                         text: _text.anyPublisher())
         
         output = viewModel.bind(input)
     }
     
     var body: some View {
         VStack {
+            HStack {
+                Text("Text added to timer")
+                TextField("One More Time", text: $text)
+            }
+            
             Text(time)
                 .padding()
             

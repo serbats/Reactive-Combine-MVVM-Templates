@@ -23,6 +23,7 @@ final class TimerViewModel: AbstractViewModel {
         var startTap: AnyPublisher<Void, Never>
         var stopTap: AnyPublisher<Void, Never>
         var resetTap: AnyPublisher<Void, Never>
+        var text: AnyPublisher<String, Never>
     }
     
     struct Output {
@@ -57,11 +58,11 @@ final class TimerViewModel: AbstractViewModel {
                 savedTime.send(currentTime)
             })
             .prepend(startTime)
-            .map { val in
-                "\(val)"
-            }
         
-        let timer = startTimer
+        let timer = Publishers.CombineLatest(input.text, startTimer)
+            .map { text, time in
+                text.isEmpty ? "\(time)" : "\(text):\(time)"
+            }
             .eraseToAnyPublisher()
         
         let output = Output(timer: timer)

@@ -9,14 +9,13 @@ struct ___VARIABLE_productName:identifier___View: View {
     let viewModel: ___VARIABLE_productName:identifier___ViewModel
     let output: ___VARIABLE_productName:identifier___ViewModel.Output
     
-    let input = PassthroughSubject<___VARIABLE_productName:identifier___ViewModel.InputAction, Never>()
-    
     init (viewModel: ___VARIABLE_productName:identifier___ViewModel) {
         _state = State(wrappedValue: viewModel.initialState)
         
         self.viewModel = viewModel
         
-        output = viewModel.bind(input.eraseToAnyPublisher())
+        let input = /*@START_MENU_TOKEN@*/___VARIABLE_productName:identifier___ViewModel.Input/*@END_MENU_TOKEN@*/
+        output = viewModel.bind(input)
     }
     
     var body: some View {

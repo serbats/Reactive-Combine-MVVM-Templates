@@ -7,8 +7,8 @@ import Combine
 import CombineExt
 
 final class ___VARIABLE_productName:identifier___ViewModel: ComposableViewModel {
-    enum InputAction {
-        case <#case#>
+    struct Input {
+        <#fields#>
     }
     
     struct AppState {
@@ -38,17 +38,9 @@ final class ___VARIABLE_productName:identifier___ViewModel: ComposableViewModel 
         return modifiedState
     }
     
-    func convert(_ inputAction: AnyPublisher<InputAction, Never>) -> AnyPublisher<AppAction, Never> {
-        return inputAction
-            .flatMapLatest { action -> AnyPublisher<AppAction, Never> in
-                switch action {
-                case <#pattern#>:
-                    <#code#>
-                default:
-                    return Empty(outputType: AppAction.self, failureType: Never.self).eraseToAnyPublisher()
-                }
-            }
-            .eraseToAnyPublisher()
+    func convert(_ input: Input) -> AnyPublisher<AppAction, Never> {
+        let actions = <#code#>
+        return actions
     }
 }
 

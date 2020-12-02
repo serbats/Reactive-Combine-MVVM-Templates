@@ -17,8 +17,11 @@
 		0DE8E72825658759002BAEF6 /* TimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE8E72725658759002BAEF6 /* TimerViewModel.swift */; };
 		0DE8E730256587B3002BAEF6 /* AbstractViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE8E72F256587B3002BAEF6 /* AbstractViewModel.swift */; };
 		0DE8E73A25667B83002BAEF6 /* CombineExt in Frameworks */ = {isa = PBXBuildFile; productRef = 0DE8E73925667B83002BAEF6 /* CombineExt */; };
-		0DF977D82577D3AF0040EB67 /* ComposedTimerViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF977D62577D3AF0040EB67 /* ComposedTimerViewView.swift */; };
-		0DF977D92577D3AF0040EB67 /* ComposedTimerViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF977D72577D3AF0040EB67 /* ComposedTimerViewViewModel.swift */; };
+		0DF977E52577DB900040EB67 /* SubjectBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF977E42577DB900040EB67 /* SubjectBinding.swift */; };
+		0DF977F82577F0170040EB67 /* ComposedTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF977F62577F0170040EB67 /* ComposedTimerView.swift */; };
+		0DF977F92577F0170040EB67 /* ComposedTimerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF977F72577F0170040EB67 /* ComposedTimerViewModel.swift */; };
+		0DF978002577F4BF0040EB67 /* Simple MVVM.xctemplate in Resources */ = {isa = PBXBuildFile; fileRef = 0DF977FE2577F4BF0040EB67 /* Simple MVVM.xctemplate */; };
+		0DF978012577F4BF0040EB67 /* Composable MVVM.xctemplate in Resources */ = {isa = PBXBuildFile; fileRef = 0DF977FF2577F4BF0040EB67 /* Composable MVVM.xctemplate */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +57,11 @@
 		0DE8E71825651548002BAEF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0DE8E72725658759002BAEF6 /* TimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerViewModel.swift; sourceTree = "<group>"; };
 		0DE8E72F256587B3002BAEF6 /* AbstractViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractViewModel.swift; sourceTree = "<group>"; };
-		0DF977D62577D3AF0040EB67 /* ComposedTimerViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposedTimerViewView.swift; sourceTree = "<group>"; };
-		0DF977D72577D3AF0040EB67 /* ComposedTimerViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposedTimerViewViewModel.swift; sourceTree = "<group>"; };
+		0DF977E42577DB900040EB67 /* SubjectBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubjectBinding.swift; sourceTree = "<group>"; };
+		0DF977F62577F0170040EB67 /* ComposedTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposedTimerView.swift; sourceTree = "<group>"; };
+		0DF977F72577F0170040EB67 /* ComposedTimerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposedTimerViewModel.swift; sourceTree = "<group>"; };
+		0DF977FE2577F4BF0040EB67 /* Simple MVVM.xctemplate */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Simple MVVM.xctemplate"; sourceTree = "<group>"; };
+		0DF977FF2577F4BF0040EB67 /* Composable MVVM.xctemplate */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Composable MVVM.xctemplate"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +113,8 @@
 		0DE8E6F825651545002BAEF6 /* SwiftUITestProj */ = {
 			isa = PBXGroup;
 			children = (
+				0DF977FD2577F4890040EB67 /* MVVM Templates */,
+				0DF977E32577DB570040EB67 /* PropertyWrappers */,
 				0DF977D42577D2610040EB67 /* SimpleTimerExample */,
 				0DF977D52577D28F0040EB67 /* ComposedTimerExample */,
 				0DE8E6F925651545002BAEF6 /* SwiftUITestProjApp.swift */,
@@ -157,10 +165,28 @@
 		0DF977D52577D28F0040EB67 /* ComposedTimerExample */ = {
 			isa = PBXGroup;
 			children = (
-				0DF977D62577D3AF0040EB67 /* ComposedTimerViewView.swift */,
-				0DF977D72577D3AF0040EB67 /* ComposedTimerViewViewModel.swift */,
+				0DF977F62577F0170040EB67 /* ComposedTimerView.swift */,
+				0DF977F72577F0170040EB67 /* ComposedTimerViewModel.swift */,
 			);
 			path = ComposedTimerExample;
+			sourceTree = "<group>";
+		};
+		0DF977E32577DB570040EB67 /* PropertyWrappers */ = {
+			isa = PBXGroup;
+			children = (
+				0DF977E42577DB900040EB67 /* SubjectBinding.swift */,
+			);
+			path = PropertyWrappers;
+			sourceTree = "<group>";
+		};
+		0DF977FD2577F4890040EB67 /* MVVM Templates */ = {
+			isa = PBXGroup;
+			children = (
+				0DF977FF2577F4BF0040EB67 /* Composable MVVM.xctemplate */,
+				0DF977FE2577F4BF0040EB67 /* Simple MVVM.xctemplate */,
+			);
+			name = "MVVM Templates";
+			path = "../MVVM Templates";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,7 +298,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DF978002577F4BF0040EB67 /* Simple MVVM.xctemplate in Resources */,
 				0DE8E70125651547002BAEF6 /* Preview Assets.xcassets in Resources */,
+				0DF978012577F4BF0040EB67 /* Composable MVVM.xctemplate in Resources */,
 				0DE8E6FE25651547002BAEF6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -298,13 +326,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0DF977D92577D3AF0040EB67 /* ComposedTimerViewViewModel.swift in Sources */,
 				0DE8E6FC25651545002BAEF6 /* TimerView.swift in Sources */,
+				0DF977F82577F0170040EB67 /* ComposedTimerView.swift in Sources */,
+				0DF977E52577DB900040EB67 /* SubjectBinding.swift in Sources */,
 				0D04162B257788CE00725B82 /* ComposableViewModel.swift in Sources */,
 				0DE8E72825658759002BAEF6 /* TimerViewModel.swift in Sources */,
 				0DE8E730256587B3002BAEF6 /* AbstractViewModel.swift in Sources */,
+				0DF977F92577F0170040EB67 /* ComposedTimerViewModel.swift in Sources */,
 				0DE8E6FA25651545002BAEF6 /* SwiftUITestProjApp.swift in Sources */,
-				0DF977D82577D3AF0040EB67 /* ComposedTimerViewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

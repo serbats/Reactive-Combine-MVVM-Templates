@@ -12,7 +12,7 @@ struct SwiftUITestProjApp: App {
     var body: some Scene {
         WindowGroup {
             TimerView(viewModel: TimerViewModel())
-            ComposedTimerViewView(viewModel: ComposedTimerViewViewModel(initialState: ComposedTimerViewViewModel.AppState(time: 0)))
+            ComposedTimerView(viewModel: ComposedTimerViewModel(initialState: ComposedTimerViewModel.AppState()))
         }
     }
 }

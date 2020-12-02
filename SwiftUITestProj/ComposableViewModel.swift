@@ -9,19 +9,18 @@ import Foundation
 import Combine
 import CombineExt
 
-protocol ComposableViewModel: AbstractViewModel where Input == AnyPublisher<InputAction, Never>, Output == AnyPublisher<AppState, Never> {
-    associatedtype InputAction
+protocol ComposableViewModel: AbstractViewModel where Output == AnyPublisher<AppState, Never> {
     associatedtype AppState
     associatedtype AppAction
     
     var initialState: AppState { get }
     
     func reduce(_ state: AppState, action: AppAction) -> AppState
-    func convert(_ inputAction: AnyPublisher<InputAction, Never>) -> AnyPublisher<AppAction, Never>
+    func convert(_ inputAction: Input) -> AnyPublisher<AppAction, Never>
 }
 
 extension ComposableViewModel {
-    func bind(_ input: AnyPublisher<InputAction, Never>) -> AnyPublisher<AppState, Never> {
+    func bind(_ input: Input) -> AnyPublisher<AppState, Never> {
         let stateSubject = CurrentValueSubject<AppState, Never>(initialState)
         
         return convert(input)

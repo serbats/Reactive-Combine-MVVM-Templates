@@ -11,19 +11,13 @@ import CombineExt
 
 final class TimerViewModel: AbstractViewModel {
     
-    enum TimerState {
-        case running
-        case stopped
-        case reset
-    }
-    
     let startTime: Int = 0
     
     struct Input {
         var startTap: AnyPublisher<Void, Never>
         var stopTap: AnyPublisher<Void, Never>
         var resetTap: AnyPublisher<Void, Never>
-        var text: AnyPublisher<String, Never>
+        var textChanged: AnyPublisher<String, Never>
     }
     
     struct Output {
@@ -32,9 +26,15 @@ final class TimerViewModel: AbstractViewModel {
     
     
     func bind(_ input: Input) -> Output {
+        enum TimerState {
+            case running
+            case stopped
+            case reset
+        }
+        
         let savedTime = CurrentValueSubject<Int, Never>(startTime)
         
-        let startTimer = Publishers.Merge3(input.startTap.map{ TimerState.running } , input.stopTap.map{ TimerState.stopped }, input.resetTap.map{ TimerState.reset } )
+        let timer = Publishers.Merge3(input.startTap.map{ TimerState.running } , input.stopTap.map{ TimerState.stopped }, input.resetTap.map{ TimerState.reset } )
             .map { state -> AnyPublisher<Int, Never> in
                 switch state {
                 case .running:
@@ -59,13 +59,13 @@ final class TimerViewModel: AbstractViewModel {
             })
             .prepend(startTime)
         
-        let timer = Publishers.CombineLatest(input.text, startTimer)
+        let timerAndText = Publishers.CombineLatest(input.textChanged, timer)
             .map { text, time in
                 text.isEmpty ? "\(time)" : "\(text):\(time)"
             }
             .eraseToAnyPublisher()
         
-        let output = Output(timer: timer)
+        let output = Output(timer: timerAndText)
         return output
     }
 }

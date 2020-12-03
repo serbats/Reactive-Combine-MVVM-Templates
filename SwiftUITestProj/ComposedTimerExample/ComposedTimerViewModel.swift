@@ -17,7 +17,6 @@ final class ComposedTimerViewModel: ComposableViewModel {
         var stopTimer: AnyPublisher<Void, Never>
         var resetTimer: AnyPublisher<Void, Never>
         var textChanged: AnyPublisher<String, Never>
-
     }
     
     struct AppState {
@@ -37,19 +36,15 @@ final class ComposedTimerViewModel: ComposableViewModel {
         self.initialState = initialState
     }
     
-    func reduce(_ state: AppState, action: AppAction) -> AppState {
-        var modifiedState = state
-        
+    func reduce(_ state: inout AppState, action: AppAction) {
         switch action {
         case .incrementTime:
-            modifiedState.time += 1
+            state.time += 1
         case .resetTime:
-            modifiedState.time = 0
+            state.time = 0
         case .modifyText(let text):
-            modifiedState.text = text
+            state.text = text
         }
-        
-        return modifiedState
     }
     
     func convert(_ input: Input) -> AnyPublisher<AppAction, Never> {
@@ -68,17 +63,9 @@ final class ComposedTimerViewModel: ComposableViewModel {
                     return Empty(outputType: Void.self, failureType: Never.self).eraseToAnyPublisher()
                 }
             }
-            .map { AppAction.incrementTime }
         
-        let resetAction = input.resetTimer
-            .map { AppAction.resetTime }
-        
-        let modifyText = input.textChanged
-            .map { AppAction.modifyText($0) }
-        
-        let actions = Publishers.Merge3(timer, resetAction, modifyText)
+        let actions = Publishers.Merge3(timer.map { AppAction.incrementTime }, input.resetTimer.map { AppAction.resetTime }, input.textChanged.map { AppAction.modifyText($0) })
             .eraseToAnyPublisher()
         return actions
     }
 }
-

@@ -25,17 +25,11 @@ final class ___VARIABLE_productName:identifier___ViewModel: ComposableViewModel 
         self.initialState = initialState
     }
     
-    func reduce(_ state: AppState, action: AppAction) -> AppState {
-        var modifiedState = state
-        
+    func reduce(_ state: inout AppState, action: AppAction) {
         switch action {
         case <#pattern#>:
             <#code#>
-        default:
-            break
         }
-        
-        return modifiedState
     }
     
     func convert(_ input: Input) -> AnyPublisher<AppAction, Never> {

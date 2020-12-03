@@ -27,7 +27,7 @@ struct TimerView: View {
         let input = TimerViewModel.Input(startTap: start.eraseToAnyPublisher(),
                                          stopTap: stop.eraseToAnyPublisher(),
                                          resetTap: reset.eraseToAnyPublisher(),
-                                         text: _text.anyPublisher())
+                                         textChanged: _text.anyPublisher())
         
         output = viewModel.bind(input)
     }

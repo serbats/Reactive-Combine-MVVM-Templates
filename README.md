@@ -12,7 +12,7 @@ This repository contains custom Xcode MVVM SwiftUI templates and code samples us
         $ cp -r "MVVM Templates" ~/Library/Developer/Xcode/Templates/
 
 3. The templates appear in the Xcode "File/New/File" template browser under a `MVVM Templates` group.
-<img src="templates.png" width="300" alt="Installation folders">
+<img src="templates.png" width="1000" alt="Installation folders">
 You can change the name of this group by renaming the installation folder  `MVVM Templates` to what you want.
 
 ## Examples 

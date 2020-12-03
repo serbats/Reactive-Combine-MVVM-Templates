@@ -13,6 +13,7 @@ This repository contains custom Xcode MVVM SwiftUI templates and code samples us
 
 3. The templates appear in the Xcode "File/New/File" template browser under a `MVVM Templates` group.
 <img src="templates.png" width="1000" alt="Installation folders">
+
 You can change the name of this group by renaming the installation folder  `MVVM Templates` to what you want.
 
 ## Examples 
@@ -380,11 +381,11 @@ What is TimerProtocol and SubjectBinding see in simple MVVM example
 ## Conclusion 
 
 Want to use cool MVVM templates in your XCode? Just install them and use in your app.
-You can simply switch them to RxSwift or other reactive library tou want instead of Combine.
+You can simply switch them to RxSwift or other reactive library you want instead of Combine.
 
 # Credits
 
-SwiftUISkeleton is owned and maintained by [email](mailto:serbats@ukr.net).
+Reactive-Combine-MVVM-Templates is owned and maintained by [email](mailto:serbats@ukr.net).
 
 # License
 

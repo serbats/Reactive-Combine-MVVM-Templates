@@ -21,9 +21,14 @@ final class TimerViewModel: AbstractViewModel {
     }
     
     struct Output {
-        var timer: AnyPublisher<String, Never>
+        var timerWithText: AnyPublisher<String, Never>
     }
     
+    struct AppEnvironment {
+        var timer: TimerProtocol.Type
+    }
+    
+    var environment: AppEnvironment!
     
     func bind(_ input: Input) -> Output {
         enum TimerState {
@@ -38,14 +43,14 @@ final class TimerViewModel: AbstractViewModel {
             .map { state -> AnyPublisher<Int, Never> in
                 switch state {
                 case .running:
-                    return Timer.TimerPublisher(interval: 1.0, runLoop: .main, mode: .default).autoconnect()
+                    return self.environment.timer.timerPublisher(1.0)
                         .withLatestFrom(savedTime)
                         .map { $0 + 1 }
                         .eraseToAnyPublisher()
                 case .stopped:
                     return Empty(outputType: Int.self, failureType: Never.self).eraseToAnyPublisher()
                 case .reset:
-                    return Timer.TimerPublisher(interval: 1.0, runLoop: .main, mode: .default).autoconnect()
+                    return self.environment.timer.timerPublisher(1.0)
                         .scan(self.startTime, { (currentTime, timer) -> Int in
                             currentTime + 1
                         })
@@ -65,7 +70,7 @@ final class TimerViewModel: AbstractViewModel {
             }
             .eraseToAnyPublisher()
         
-        let output = Output(timer: timerAndText)
+        let output = Output(timerWithText: timerAndText)
         return output
     }
 }

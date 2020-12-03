@@ -33,27 +33,29 @@ struct ComposedTimerView: View {
     }
     
     var body: some View {
-        Group {
-            VStack {
-                HStack {
-                    Text("Text added to timer")
-                    TextField("One More Time", text: $text)
-                }
-                
-                Text(state.text.isEmpty ? "\(state.time)" : "\(state.text):\(state.time)")
-                    .padding()
-                
-                Button("Start") {
-                    start.send()
-                }
-                
-                Button("Stop") {
-                    stop.send()
-                }
-                
-                Button("Reset") {
-                    reset.send()
-                }
+        VStack {
+            Text("Composable View Model")
+                .font(.largeTitle)
+                .multilineTextAlignment(.center)
+            
+            HStack {
+                Text("Text added to timer")
+                TextField("One More Time", text: $text)
+            }
+            
+            Text(state.text.isEmpty ? "\(state.time)" : "\(state.text):\(state.time)")
+                .padding()
+            
+            Button("Start") {
+                start.send()
+            }
+            
+            Button("Stop") {
+                stop.send()
+            }
+            
+            Button("Reset") {
+                reset.send()
             }
         }
         .onReceive(output, perform: { state in
@@ -63,8 +65,11 @@ struct ComposedTimerView: View {
 }
 
 struct ComposedTimerPreviews: PreviewProvider {
+    static var diManager: DependencyInjectionProtocol {
+        return DependencyInjectionManager()
+    }
+    
     static var previews: some View {
-        ComposedTimerView(viewModel: ComposedTimerViewModel(initialState: ComposedTimerViewModel.AppState()))
+        diManager.composableTimerView()
     }
 }
-

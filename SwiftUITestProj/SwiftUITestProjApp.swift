@@ -9,10 +9,15 @@ import SwiftUI
 
 @main
 struct SwiftUITestProjApp: App {
+    let diManager: DependencyInjectionProtocol = DependencyInjectionManager()
+    
     var body: some Scene {
         WindowGroup {
-            TimerView(viewModel: TimerViewModel())
-            ComposedTimerView(viewModel: ComposedTimerViewModel(initialState: ComposedTimerViewModel.AppState()))
+            TabView {
+                diManager.simpleTimerView()
+                diManager.composableTimerView()
+            }
+            .tabViewStyle(PageTabViewStyle())
         }
     }
 }

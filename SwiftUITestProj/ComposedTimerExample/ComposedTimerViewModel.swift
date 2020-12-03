@@ -30,6 +30,12 @@ final class ComposedTimerViewModel: ComposableViewModel {
         case modifyText(String)
     }
     
+    struct AppEnvironment {
+        var timer: TimerProtocol.Type
+    }
+    
+    var environment: AppEnvironment!
+    
     let initialState: AppState
     
     init(initialState: AppState) {
@@ -58,7 +64,7 @@ final class ComposedTimerViewModel: ComposableViewModel {
             .flatMapLatest { action -> AnyPublisher<Void, Never> in
                 switch action {
                 case .start, .reset:
-                    return Timer.TimerPublisher(interval: 1.0, runLoop: .main, mode: .default).autoconnect().map { _ in () }.eraseToAnyPublisher()
+                    return self.environment.timer.timerPublisher(1.0).map { _ in () }.eraseToAnyPublisher()
                 case .stop:
                     return Empty(outputType: Void.self, failureType: Never.self).eraseToAnyPublisher()
                 }

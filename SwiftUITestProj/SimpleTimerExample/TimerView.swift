@@ -34,6 +34,10 @@ struct TimerView: View {
     
     var body: some View {
         VStack {
+            Text("Simple View Model")
+                .font(.largeTitle)
+                .multilineTextAlignment(.center)
+            
             HStack {
                 Text("Text added to timer")
                 TextField("One More Time", text: $text)
@@ -54,16 +58,18 @@ struct TimerView: View {
                 reset.send()
             }
         }
-        .onReceive(output.timer, perform: { time in
+        .onReceive(output.timerWithText, perform: { time in
             self.time = time
         })
     }
-    
-    
 }
 
 struct ContentView_Previews: PreviewProvider {
+    static var diManager: DependencyInjectionProtocol {
+        return DependencyInjectionManager()
+    }
+    
     static var previews: some View {
-        TimerView(viewModel: TimerViewModel())
+        diManager.simpleTimerView()
     }
 }

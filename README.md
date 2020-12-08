@@ -226,7 +226,7 @@ extension ComposableViewModel {
     func bind(_ input: Input) -> AnyPublisher<AppState, Never> {
         let stateSubject = CurrentValueSubject<AppState, Never>(initialState)
         
-        return convert(input)
+        return convert(input, stateSubject: stateSubject)
             .withLatestFrom(stateSubject) { prepareReduce($1, action: $0) }
             .handleEvents(receiveOutput: stateSubject.send)
             .prepend(initialState)

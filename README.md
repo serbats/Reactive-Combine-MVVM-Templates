@@ -211,7 +211,7 @@ protocol ComposableViewModel: AbstractViewModel where Output == AnyPublisher<App
     var initialState: AppState { get }
     
     func reduce(_ state: inout AppState, action: AppAction)
-    func convert(_ inputAction: Input) -> AnyPublisher<AppAction, Never>
+    func convert(_ input: Input, stateSubject: CurrentValueSubject<AppState, Never>) -> AnyPublisher<AppAction, Never>
 }
 
 extension ComposableViewModel {
@@ -281,7 +281,7 @@ final class ComposedTimerViewModel: ComposableViewModel {
         }
     }
     
-    func convert(_ input: Input) -> AnyPublisher<AppAction, Never> {
+    func convert(_ input: Input, stateSubject: CurrentValueSubject<AppState, Never>) -> AnyPublisher<AppAction, Never> {
         enum TimerActions {
             case start
             case stop

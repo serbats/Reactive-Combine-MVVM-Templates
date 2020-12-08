@@ -53,7 +53,7 @@ final class ComposedTimerViewModel: ComposableViewModel {
         }
     }
     
-    func convert(_ input: Input) -> AnyPublisher<AppAction, Never> {
+    func convert(_ input: Input, stateSubject: CurrentValueSubject<AppState, Never>) -> AnyPublisher<AppAction, Never> {
         enum TimerActions {
             case start
             case stop

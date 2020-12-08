@@ -16,7 +16,7 @@ protocol ComposableViewModel: AbstractViewModel where Output == AnyPublisher<App
     var initialState: AppState { get }
     
     func reduce(_ state: inout AppState, action: AppAction)
-    func convert(_ inputAction: Input) -> AnyPublisher<AppAction, Never>
+    func convert(_ input: Input, stateSubject: CurrentValueSubject<AppState, Never>) -> AnyPublisher<AppAction, Never>
 }
 
 extension ComposableViewModel {
@@ -31,7 +31,7 @@ extension ComposableViewModel {
     func bind(_ input: Input) -> AnyPublisher<AppState, Never> {
         let stateSubject = CurrentValueSubject<AppState, Never>(initialState)
         
-        return convert(input)
+        return convert(input, stateSubject: stateSubject)
             .withLatestFrom(stateSubject) { prepareReduce($1, action: $0) }
             .handleEvents(receiveOutput: stateSubject.send)
             .prepend(initialState)

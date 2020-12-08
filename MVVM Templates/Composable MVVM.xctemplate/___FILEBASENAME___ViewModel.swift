@@ -32,7 +32,7 @@ final class ___VARIABLE_productName:identifier___ViewModel: ComposableViewModel 
         }
     }
     
-    func convert(_ input: Input) -> AnyPublisher<AppAction, Never> {
+    func convert(_ input: Input, stateSubject: CurrentValueSubject<AppState, Never>) -> AnyPublisher<AppAction, Never> {
         let actions = <#code#>
         return actions
     }
